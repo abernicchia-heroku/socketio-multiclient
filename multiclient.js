@@ -27,6 +27,10 @@ const createClient = () => {
     packetsSinceLastReport++;
   });
 
+  socket.on("s2c-event", (data) => {
+      console.info(`Server2Client event data: ${data}`);
+  });
+
   socket.on("disconnect", (reason) => {
     console.log(`disconnect due to ${reason}`);
   });
