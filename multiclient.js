@@ -1,6 +1,8 @@
+// code based on https://socket.io/docs/v4/load-testing/#manual-client-creation adapted to run locally and on Heroku
+
 const { io } = require("socket.io-client");
 
-const URL = process.env.CLIENT_WSSERVERURL || "http://localhost:8000";
+const URL = process.env.CLIENT_WSSERVERURL || "http://localhost:3000";
 const MAX_CLIENTS = process.env.MAX_CLIENTS || 5;
 const CLIENT_CREATION_INTERVAL_IN_MS = process.env.CLIENT_CREATION_INTERVAL_IN_MS || 250;
 const EMIT_INTERVAL_IN_MS = process.env.EMIT_INTERVAL_IN_MS || 2000;
@@ -9,10 +11,9 @@ let clientCount = 0;
 let lastReport = new Date().getTime();
 let packetsSinceLastReport = 0;
 
-console.info(`connecting to: ${URL}`);
+console.info(`Connecting to Websocket server URL: ${URL}`);
 
 const createClient = () => {
-  // for demonstration purposes, some clients stay stuck in HTTP long-polling
   const transports = ["websocket"];
 
   const socket = io(URL, {
@@ -28,7 +29,7 @@ const createClient = () => {
   });
 
   socket.on("s2c-event", (data) => {
-      console.info(`Server2Client event data: ${data}`);
+      console.info(`Server2Client event data: ${data} clientID: ${socket.id}`);
   });
 
   socket.on("disconnect", (reason) => {
