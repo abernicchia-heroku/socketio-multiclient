@@ -55,6 +55,10 @@ The following configuration variables are used by the application:
 
 You can test your multi-client using any socket.io compatible server like this compound [server](https://github.com/abernicchia-heroku/socketio-server) that creates multiple socket.io servers and is able to handle the events sent/received by the client.
 
+Every EMIT_INTERVAL_IN_MS clients send a random message (**c2s-event** event) to their servers.
+
+Clients listen for **seq-num** and **s2c-event** events from servers.
+
 It's possible to enable debug messages (e.g. when events are emitted or received) setting LOG_LEVEL=debug.
 
 
