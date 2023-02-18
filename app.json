@@ -36,5 +36,8 @@
       "quantity": 1
     }
   },
-  "image": "heroku/nodejs"
+  "image": "heroku/nodejs",
+  "addons": [
+    "papertrail"
+  ]
 }
