@@ -30,7 +30,7 @@ Otherwise, use the following procedure to deploy the application manually:
 ```
 git clone https://github.com/abernicchia-heroku/socketio-multiclient.git
 cd socketio-multiclient
-heroku create
+heroku create <app name>
 heroku addons:create papertrail
 git add .
 git commit -m "starting point"
