@@ -1,0 +1,40 @@
+{
+  "name": "socket.io multiclient",
+  "description": "Example of socket.io multi-client that spawns multiple websocket clients to send and receive events to/from a websocket server",
+  "keywords": [
+    "node",
+    "socket.io",
+    "websocket",
+    "heroku"
+  ],
+  "repository": "https://github.com/abernicchia-heroku/socketio-multiclient",
+  "env": {
+    "CLIENT_WSSERVERURL": {
+      "description": "Websocket server URL",
+      "value": "http://localhost:3000"
+    },
+    "MAX_CLIENTS": {
+      "description": "Number of parallel clients",
+      "value": "5"
+    },    
+    "CLIENT_CREATION_INTERVAL_IN_MS": {
+      "description": "Delay time in milliseconds before creating a new client",
+      "value": "250"
+    },
+    "EMIT_INTERVAL_IN_MS": {
+      "description": "Emitting events frequency in milliseconds",
+      "value": "2000"
+    },    
+    "LOG_LEVEL": {
+      "description": "Log level",
+      "value": "info",
+      "required": false
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "image": "heroku/nodejs"
+}
