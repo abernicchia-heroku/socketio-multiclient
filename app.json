@@ -37,7 +37,11 @@
       "size": "standard-1x"
     }
   },
-  "image": "heroku/nodejs",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
   "addons": [
     "papertrail"
   ]

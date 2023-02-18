@@ -19,6 +19,12 @@ Use the following Heroku Button to create an application, all required add-ons a
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+Once created, scale to 0 the web dyno (not used and created by default) then scale to 1 the worker dyno.
+```
+heroku ps:scale web=0 worker=1
+```
+
+
 Otherwise, use the following procedure to deploy the application manually:
 
 ```
@@ -29,14 +35,14 @@ heroku addons:create papertrail
 git add .
 git commit -m "starting point"
 git push heroku main
-heroku ps:scale web=1
+heroku ps:scale web=0 worker=1
 ```
 
 ## Environment variables configuration
 
 The following configuration variables are used by the application:
 
-**CLIENT_WSSERVERURL**: Websocket server URL.
+**CLIENT_WSSERVERURL**: Websocket server URL (e.g. wss://socketio-server.herokuapp.com, ws://socketio-server.herokuapp.com, https://socketio-server.herokuapp.com, http://socketio-server.herokuapp.com)
 
 **MAX_CLIENTS**: Number of parallel clients.
 
