@@ -22,11 +22,15 @@ const logger = winston.createLogger({
 logger.info(`Connecting to Websocket server URL: ${URL}`);
 
 const createClient = () => {
+  logger.debug(`creating new socket.io client`);
+
   const transports = ["websocket"];
 
   const socket = io(URL, {
     transports,
   });
+
+  clientCount++;
 
   setInterval(() => {
      socket.emit("c2s-event", Math.floor(Math.random() * 1000000));
@@ -43,9 +47,10 @@ const createClient = () => {
 
   socket.on("disconnect", (reason) => {
     logger.info(`disconnect due to ${reason}`);
+    clientCount--;
   });
 
-  if (++clientCount < MAX_CLIENTS) {
+  if (clientCount < MAX_CLIENTS) {
     setTimeout(createClient, CLIENT_CREATION_INTERVAL_IN_MS);
   }
 };
@@ -65,4 +70,5 @@ const printReport = () => {
   lastReport = now;
 };
 
+setInterval(createClient, 10000);
 setInterval(printReport, 5000);
